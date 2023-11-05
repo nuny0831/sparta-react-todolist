@@ -1,9 +1,10 @@
-import "./App.css";
-import React, { useState } from "react";
+import './App.css';
+import React, {useState} from 'react';
+import {Card} from './components/Card';
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [todos, setTodos] = useState([]);
 
   const titleChangeHandler = (event) => {
@@ -30,8 +31,8 @@ function App() {
     //     content: content,
     //   },
     // ]);
-    setTitle("");
-    setContent("");
+    setTitle('');
+    setContent('');
   };
 
   const clickDeleteButtonHandler = (index) => {
@@ -63,17 +64,9 @@ function App() {
         <div className="input">
           <div>
             제목
-            <input
-              className="title-input"
-              value={title}
-              onChange={titleChangeHandler}
-            />
+            <input className="title-input" value={title} onChange={titleChangeHandler} />
             내용
-            <input
-              className="content-input"
-              value={content}
-              onChange={contentChangeHendler}
-            />
+            <input className="content-input" value={content} onChange={contentChangeHendler} />
           </div>
         </div>
         <div>
@@ -87,24 +80,12 @@ function App() {
         {todos
           .filter((todo) => todo.isDone === false)
           .map((work, index) => (
-            <div className="working-card" key={index}>
-              <div className="title-working">{work.title}</div>
-              <div className="content-working">{work.content}</div>
-              <div className="button-working">
-                <button
-                  className="delete-button"
-                  onClick={() => clickDeleteButtonHandler(index)}
-                >
-                  삭제하기
-                </button>
-                <button
-                  className="complete-button"
-                  onClick={() => clickCompleteButtonHandler(index)}
-                >
-                  완료
-                </button>
-              </div>
-            </div>
+            <Card
+              index={index}
+              work={work}
+              clickDeleteButtonHandler={clickDeleteButtonHandler}
+              clickCompleteButtonHandler={clickCompleteButtonHandler}
+            />
           ))}
       </div>
       <div className="working">👌Done👌</div>
@@ -112,24 +93,12 @@ function App() {
         {todos
           .filter((todo) => todo.isDone === true)
           .map((work, index) => (
-            <div className="done-card" key={index}>
-              <div className="title-working">{work.title}</div>
-              <div className="content-working">{work.content}</div>
-              <div className="button-working">
-                <button
-                  className="delete-button"
-                  onClick={() => clickDeleteButtonHandler(index)}
-                >
-                  삭제하기
-                </button>
-                <button
-                  className="complete-button"
-                  onClick={() => clickCompleteButtonHandler(index)}
-                >
-                  취소
-                </button>
-              </div>
-            </div>
+            <Card
+              index={index}
+              work={work}
+              clickDeleteButtonHandler={clickDeleteButtonHandler}
+              clickCompleteButtonHandler={clickCompleteButtonHandler}
+            />
           ))}
       </div>
     </div>
